@@ -1,4 +1,4 @@
-name: bqplot
+name: GrundfosDataMicroService
 channels:
   - conda-forge
 dependencies:
@@ -6,3 +6,4 @@ dependencies:
   - scikit-learn
   - scipy
   - numpy
+  - papermill
