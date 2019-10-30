@@ -7,4 +7,4 @@ dependencies:
   - scipy
   - numpy
   - papermill
-  - schedule-0.6.0
+  - python3 -m pip install schedule
