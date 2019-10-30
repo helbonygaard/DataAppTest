@@ -1,11 +1,10 @@
 name: GrundfosDataMicroService
 channels:
   - conda-forge
-  - PyPi
 dependencies:
   - bqplot=0.11.2
   - scikit-learn
   - scipy
   - numpy
   - papermill
-  - schedule
+  - gomss-nowcast schedule
