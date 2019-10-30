@@ -7,3 +7,4 @@ dependencies:
   - scipy
   - numpy
   - papermill
+  - schedule-0.6.0
