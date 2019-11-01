@@ -5,7 +5,7 @@ from datetime import datetime
 import json, sys
 
 def job(): # parameterize job - naturally!
-    with open("subscription.json") as jsonfile:
+    with open("subscriptionConfig.json") as jsonfile:
         dictionary = json.load(jsonfile)
     pm.execute_notebook(
 		'OverflowServiceSandbox.ipynb',
