@@ -23,11 +23,11 @@ This package depends on the following packages:
 - `traittypes` (Version >=0.2.1, <0.3)
 - `numpy`
 - `pandas`
-- 'conda-forge'
-- 'scikit-learn'
-- 'scipy'
-- 'numpy'
-- 'papermill'
+- `conda-forge`
+- `scikit-learn`
+- `scipy`
+- `numpy`
+- `papermill`
 
 ## Documentation (addition)
 A few elements to show-case the Sponge City work is added, but ONLY to show-case the ideas
