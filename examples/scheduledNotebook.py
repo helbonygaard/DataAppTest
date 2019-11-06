@@ -1,8 +1,12 @@
-import schedule
+
 import time
 import papermill as pm
 from datetime import datetime
 import json, sys
+import os
+
+def install(package):
+    os.system(str("python3 -m pip install " + package))
 
 def job(): # parameterize job - naturally!
     with open("subscriptionConfig.json") as jsonfile:
@@ -24,6 +28,8 @@ def job(): # parameterize job - naturally!
 
 # Activate job schedule
 # Set up CLI Arguments
+install('schedule') # Special environment package for production scheduling
+import schedule
 schedule.every(1).minutes.do(job)
 
 # Other schedules
