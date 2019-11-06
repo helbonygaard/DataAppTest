@@ -38,6 +38,9 @@ This package depends on the following packages:
 ## Documentation (addition)
 A few elements to show-case the Sponge City work is added, but ONLY to show-case the ideas
 
+Send mail to mnygaard@grundfos.com, if you want to try it out:
+https://hub.grundfosdataservices.com/hub/home
+
 ## Documentation (foundation)
 
 To get started with using `bqplot`, check out the full documentation
