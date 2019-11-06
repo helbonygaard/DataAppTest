@@ -5,14 +5,9 @@ Interactive 2-D plotting schedulable compute node test library for Alibaba proje
 ## Introduction
 
 bqplot is a 2-D visualization system for Jupyter, based on the constructs of
-the *Grammar of Graphics*.
+the *Grammar of Graphics*. In the examples folder project specific notebooks and content is added
 
-## Goals
-
--   provide a unified framework for 2-D visualizations with a pythonic API.
--   provide a sensible API for adding user interactions (panning, zooming, selection, etc)
-
-Two APIs are provided
+## Two APIs are provided
 
 - Users can build custom visualizations using the internal object model, which
   is inspired by the constructs of the Grammar of Graphics (figure, marks, axes,
@@ -29,6 +24,11 @@ This package depends on the following packages:
 - `traittypes` (Version >=0.2.1, <0.3)
 - `numpy`
 - `pandas`
+- 'conda-forge'
+- 'scikit-learn'
+- 'scipy'
+- 'numpy'
+- 'papermill'
 
 ## Documentation (addition)
 A few elements to show-case the Sponge City work is added, but ONLY to show-case the ideas
