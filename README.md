@@ -1,6 +1,6 @@
 # Sponge City Oriented Notebook Collection with plenty of plot elements from the great bqplot work
 
-2-D plotting library for Project Jupyter
+Interactive 2-D plotting schedulable compute node test library for Alibaba project
 
 ## Introduction
 
