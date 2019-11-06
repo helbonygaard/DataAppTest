@@ -43,7 +43,7 @@ schedule.every(1).minutes.do(job)
 # Execute schedule for ever
 while True:
     schedule.run_pending()
-    time.sleep(15)
+    time.sleep(10)
 
 # How to start-up in cli
 # python scheduledNotebook.py '{start:'2019-06-04T0:55:52Z', stop:'2019-06-05T19:28:52Z', levelThreshold:0.45, maxThreshold:0.90, levelSlopeAngle:0.000085, dataOffset=0, bufferLength=30, resultAttribute='overflow'}'
