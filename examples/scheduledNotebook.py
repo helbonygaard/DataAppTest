@@ -1,21 +1,14 @@
-
 import time
 import papermill as pm
 from datetime import datetime
 import json, sys
 import os
-import random
 
 def install(package):
     os.system(str("python3 -m pip install " + package))
 		
-def comprehensionCatch(func, handle=lambda e : e, *args, **kwargs):
-    try:
-        return func(*args, **kwargs)
-    except Exception as e:
-        return handle # handle(e)
 
-def job(resultKey): # parameterize job - naturally!
+def job(): # parameterize job - naturally!
     with open("subscriptionConfig.json") as jsonfile:
         dictionary = json.load(jsonfile)
     pm.execute_notebook(
@@ -37,7 +30,7 @@ def job(resultKey): # parameterize job - naturally!
 # Set up CLI Arguments
 install('schedule') # Special environment package for production scheduling
 import schedule
-schedule.every(10).minutes.do(job('resultAttribute'))
+schedule.every(10).minutes.do(job)
 
 # Other schedules
 #schedule.every().hour.do(job)
