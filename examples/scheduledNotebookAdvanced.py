@@ -1,4 +1,4 @@
-
+#author @60888
 import time
 import papermill as pm
 from datetime import datetime
@@ -18,6 +18,25 @@ def comprehensionCatch(func, handle=lambda e : e, *args, **kwargs):
 def job(resultKey): # parameterize job - naturally!
     with open("subscriptionConfig.json") as jsonfile:
         dictionary = json.load(jsonfile)
+		containsNumberOfLists = sum([len(dictionary[x]) for x in dictionary if isinstance(dictionary[x], list)])
+		resultAttributes = dictionary.pop(resultKey, None)
+		dictionaryNew = {resultKey:resultAttributes}
+		try: # Is this a drill?
+			# Do some dictionary magic
+			stringDictionary = { key:value for (key,value) in dictionary.items() if isinstance(value[0], str)}
+			stringListDictionary = [dict(zip(stringDictionary, i)) for i in zip(*stringDictionary.values())] # [dict(zip(dictionary, i)) for i in zip(*dictionary.values())] 
+			dictionaryNew.update(stringListDictionary[0])
+			intergerDictionary = { key:value for (key,value) in dictionary.items() if isinstance(value[0], int)}
+			#intergerListDictionary = [dict(zip(intergerDictionary, i)) for i in zip(*intergerDictionary.values())]
+			randomIntegers = { key:random.randint(value[0],value[1]) for (key,value) in intergerDictionary.items()}
+			dictionaryNew.update(randomIntegers) 
+			floatDictionary = { key:value for (key,value) in dictionary.items() if isinstance(value[0], float)}
+			#floatListDictionary = [dict(zip(floatDictionary, i)) for i in zip(*floatDictionary.values())]
+			randomFloats = { key:random.uniform(value[0],value[1]) for (key,value) in floatDictionary.items()}
+			dictionaryNew.update(randomFloats)
+			dictionary = dictionaryNew
+		except:
+			print("This is not a drill")
     pm.execute_notebook(
 		'OverflowServiceSandbox.ipynb',
 		'./runLogs/OverflowServiceSandbox_run_time_'+str(datetime.timestamp(datetime.now()))+'.ipynb',

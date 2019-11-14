@@ -1,0 +1,1 @@
+{"start":["2019-06-04T0:55:52Z", "2019-06-04T0:55:52Z"], "stop":["2019-06-05T19:28:52Z", "2019-06-05T19:28:52Z"], "levelThreshold":[0.40, 0.55], "maxThreshold":[0.85, 0.95], "levelSlopeAngle":[0.0000085, 0.00085], "dataOffsetMin":[0, 0], "bufferLengthMin":[20,30], "resultAttribute":"overflow"}
