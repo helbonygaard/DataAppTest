@@ -1,0 +1,136 @@
+https://binderhub.readthedocs.io/en/latest/create-cloud-resources.html
+But do:
+gcloud container clusters create --machine-type n1-standard-2 --num-nodes 2 --zone europe-west2-b --cluster-version latest grundfos-binderhub
+
+To test if your cluster is initialized, run:
+kubectl get node
+kubectl create clusterrolebinding cluster-admin-binding --clusterrole=cluster-admin --user=dichaelen@gmail.com
+
+Then create a container registry (for Google cloud platform)
+Go to console.cloud.google.com
+Make sure your project is selected
+Click <top-left menu w/ three horizontal bars> -> IAM & Admin -> Service Accounts menu option
+Click Create service account
+Give your account a descriptive name such as “binderhub-builder”
+Click Role -> Storage -> Storage Admin menu option
+Click Create Key
+Leave key type as default of JSON
+Click Create
+These steps will download a JSON file to your computer. The JSON file contains the password that can be used to push Docker images to the gcr.io registry.
+
+BinderHub custom flow:
+
+mkdir binderhub
+cd binderhub
+
+Create two random tokens by running the following commands then copying the outputs.:
+openssl rand -hex 32
+openssl rand -hex 32
+
+Create a file called secret.yaml
+Create a file called config.yaml and choose the following directions based on the registry you are using.
+
+Setup Tiller:
+curl https://raw.githubusercontent.com/kubernetes/helm/master/scripts/get | bash
+kubectl --namespace kube-system create serviceaccount tiller
+helm init --service-account tiller --wait
+helm init --client-only
+kubectl patch deployment tiller-deploy --namespace=kube-system --type=json --patch='[{"op": "add", "path": "/spec/template/spec/containers/0/command", "value": ["/tiller", "--listen=localhost:44134"]}]'
+helm version
+
+helm repo add jupyterhub https://jupyterhub.github.io/helm-chart
+helm repo update
+
+When you are unable to set a namespace:
+kubectl create clusterrolebinding permissive-binding --clusterrole=cluster-admin --user=admin --user=kubelet --group=system:serviceaccounts
+
+
+helm install jupyterhub/binderhub --version=0.2.0-b9ed7f5 --name=grundfos-binderhub --namespace=binderhub-builder -f secret.yaml -f config.yaml ### Old version: # 0.2.0-3b53fce
+
+kubectl --namespace=binderhub-builder get svc proxy-public
+
+helm upgrade grundfos-binderhub jupyterhub/binderhub --version=0.2.0-b9ed7f5 -f secret.yaml -f config.yaml
+
+kubectl --namespace=binderhub-builder get svc binder
+
+Delete the whole thing:
+
+helm delete grundfos-binderhub --purge
+
+kubectl delete namespace binderhub-builder
+
+gcloud container clusters list
+You can then delete the one you want.
+gcloud container clusters delete <CLUSTER-NAME> --zone=<CLUSTER-ZONE>
+At a minimum, check the following under the "Hamburger" (left top corner) menu:
+
+Secure access to Helm
+You can mitigate this by limiting public access to the Tiller API. To do so, use the following command:
+kubectl --namespace=kube-system patch deployment tiller-deploy --type=json --patch='[{"op": "add", "path": "/spec/template/spec/containers/0/command", "value": ["/tiller", "--listen=localhost:44134"]}]'
+This limit shouldn’t affect helm functionality in any form.
+
+Compute -> Compute Engine -> Disks
+Compute -> Kubernetes Engine -> Clusters
+Tools -> Container Registry -> Images
+Networking -> Network Services -> Load Balancing
+
+Install parameterizer
+python3 -m pip install papermill
+
+Install scheduler
+python3 -m pip install schedule
+
+
+
+# External scheduler
+python3 -m pip install apache-airflow
+- Setup DB for AirFlow
+	airflow initdb
+	# start the web server, default port is 8080
+	airflow webserver -p 8080
+	# start the scheduler
+	airflow scheduler
+
+Command Line Metadata Validation
+# print the list of active DAGs
+airflow list_dags
+
+# prints the list of tasks the "tutorial" dag_id
+airflow list_tasks tutorial
+
+# prints the hierarchy of tasks in the tutorial DAG
+airflow list_tasks tutorial --tree
+
+# command layout: command subcommand dag_id task_id date
+
+# testing print_date
+airflow test tutorial print_date 2019-06-01
+
+# testing sleep
+airflow test tutorial sleep 2019-06-01
+
+# testing templated
+airflow test tutorial templated 2019-06-01
+
+# optional, start a web server in debug mode in the background
+# airflow webserver --debug &
+
+# start your backfill on a date range
+airflow backfill tutorial -s 2019-06-01 -e 2019-06-07
+
+# Do conda install and activate (deactivate)
+conda create -n airflow pip setuptools python=3.6
+(conda init bash)
+conda activate airflow (conda deactivate)
+python3 -m pip install "apache-airflow[s3, postgres]"
+
+
+Links:
+https://console.cloud.google.com/iam-admin/serviceaccounts?cloudshell=true&project=vibrant-reach-254013
+https://domains.google.com/m/registrar/grundfosdataservices.com/dns
+http://34.89.27.137/ (BinderHub)
+http://34.89.19.115/ (JupyterHub)
+https://github.com/settings/applications/1161895
+
+Result sneak peak:
+http://grundfossmartcity.com:8080/index?start=2019-06-04T14:30:52Z&stop=2019-06-05T15:35:52Z
