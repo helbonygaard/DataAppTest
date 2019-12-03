@@ -121,14 +121,3 @@ conda create -n airflow pip setuptools python=3.6
 (conda init bash)
 conda activate airflow (conda deactivate)
 python3 -m pip install "apache-airflow[s3, postgres]"
-
-
-Links:
-https://console.cloud.google.com/iam-admin/serviceaccounts?cloudshell=true&project=vibrant-reach-254013
-https://domains.google.com/m/registrar/grundfosdataservices.com/dns
-http://34.89.27.137/ (BinderHub)
-http://34.89.19.115/ (JupyterHub)
-https://github.com/settings/applications/1161895
-
-Result sneak peak:
-http://grundfossmartcity.com:8080/index?start=2019-06-04T14:30:52Z&stop=2019-06-05T15:35:52Z
