@@ -1,5 +1,3 @@
-https://binderhub.readthedocs.io/en/latest/create-cloud-resources.html
-But do:
 gcloud container clusters create --machine-type n1-standard-2 --num-nodes 2 --zone europe-west2-b --cluster-version latest grundfos-binderhub
 
 To test if your cluster is initialized, run:
