@@ -1,9 +1,10 @@
 name: GrundfosDataMicroService
-channels:
-  - conda-forge
+#channels:
+#  - conda-forge
 dependencies:
   - bqplot
   - scikit-learn
   - scipy
   - numpy
   - papermill
+  - pip
